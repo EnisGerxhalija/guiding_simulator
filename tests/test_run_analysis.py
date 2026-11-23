@@ -12,7 +12,7 @@ CONFIG = PROJECT_ROOT / "configs" / "default.toml"
 
 
 def run_script(output_dir):
-    env = {**os.environ, "MY_PROJECT_OUTPUT_DIR": str(output_dir)}
+    env = {**os.environ, "GUIDING_SIMULATOR_OUTPUT_DIR": str(output_dir)}
     result = subprocess.run(
         [sys.executable, str(SCRIPT), "--config", str(CONFIG)],
         env=env,

@@ -2,9 +2,9 @@
 
 import json
 
-from my_project import __version__
-from my_project.config import RunConfig
-from my_project.provenance import create_run_dir, git_info, write_metadata
+from guiding_simulator import __version__
+from guiding_simulator.config import RunConfig
+from guiding_simulator.provenance import create_run_dir, git_info, write_metadata
 
 
 def test_run_dirs_are_never_reused(tmp_path):

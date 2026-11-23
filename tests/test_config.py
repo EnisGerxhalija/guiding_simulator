@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from my_project.config import (
+from guiding_simulator.config import (
     RunConfig,
     Settings,
     find_project_root,
@@ -63,7 +63,7 @@ def test_config_round_trips_through_json():
 
 # --- settings ----------------------------------------------------------------
 def test_environment_variable_overrides_default(monkeypatch, tmp_path):
-    monkeypatch.setenv("MY_PROJECT_LOG_LEVEL", "DEBUG")
+    monkeypatch.setenv("GUIDING_SIMULATOR_LOG_LEVEL", "DEBUG")
     assert Settings(_env_file=None, project_root=tmp_path).log_level == "DEBUG"
 
 
@@ -75,7 +75,7 @@ def test_relative_paths_are_resolved_against_project_root(tmp_path):
 
 def test_load_settings_works_from_a_subfolder(monkeypatch, tmp_path):
     (tmp_path / "pyproject.toml").write_text("", encoding="utf-8")
-    (tmp_path / ".env").write_text("MY_PROJECT_OUTPUT_DIR=results\n", encoding="utf-8")
+    (tmp_path / ".env").write_text("GUIDING_SIMULATOR_OUTPUT_DIR=results\n", encoding="utf-8")
     (tmp_path / "notebooks").mkdir()
     monkeypatch.chdir(tmp_path / "notebooks")
 

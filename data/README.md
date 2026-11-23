@@ -6,7 +6,7 @@
 | `processed/` | Cleaned or converted data written by code in this repository. Can always be regenerated from `raw/`. | No (ignored) |
 
 Large datasets can live elsewhere (a shared drive, OneDrive, HPC scratch). Set
-`MY_PROJECT_DATA_DIR` in `.env` to the folder that contains `raw/` and
+`GUIDING_SIMULATOR_DATA_DIR` in `.env` to the folder that contains `raw/` and
 `processed/`; the code reads it through `settings.raw_dir` and
 `settings.processed_dir`.
 

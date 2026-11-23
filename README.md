@@ -1,8 +1,8 @@
-# My Project
+# Guiding Simulator
 
-[![CI](https://github.com/your-github-username/my-project/actions/workflows/ci.yml/badge.svg)](https://github.com/your-github-username/my-project/actions/workflows/ci.yml)
+[![CI](https://github.com/EnisGerxhalija/guiding-simulator/actions/workflows/ci.yml/badge.svg)](https://github.com/EnisGerxhalija/guiding-simulator/actions/workflows/ci.yml)
 
-A short description of the project.
+Analysis and simulation code for tip/tilt guiding simulator
 
 <!-- Two or three sentences: what question does this code answer, what data
 does it work on, and what does it produce? -->
@@ -12,8 +12,8 @@ does it work on, and what does it produce? -->
 Requires Python 3.11 or newer.
 
 ```bash
-git clone https://github.com/your-github-username/my-project.git
-cd my-project
+git clone https://github.com/EnisGerxhalija/guiding-simulator.git
+cd guiding-simulator
 make setup
 ```
 
@@ -41,7 +41,7 @@ config, the log and `run_metadata.json` (git commit, package versions, ...).
 From Python:
 
 ```python
-from my_project.example import gaussian
+from guiding_simulator.example import gaussian
 
 gaussian([0.0, 1.0], amplitude=2.0, centre=0.0, sigma=1.0)
 ```
@@ -49,8 +49,8 @@ gaussian([0.0, 1.0], amplitude=2.0, centre=0.0, sigma=1.0)
 ## Project layout
 
 ```text
-my-project/
-├── src/my_project/      # the package: all reusable code lives here
+guiding-simulator/
+├── src/guiding_simulator/      # the package: all reusable code lives here
 │   ├── config.py        #   Settings (.env) and RunConfig (configs/*.toml)
 │   ├── provenance.py    #   run folders and run_metadata.json
 │   ├── logging_utils.py #   setup_logging() for scripts and notebooks

@@ -5,8 +5,8 @@
 You need Python 3.11 or newer (`python3 --version`).
 
 ```bash
-git clone https://github.com/your-github-username/my-project.git
-cd my-project
+git clone https://github.com/EnisGerxhalija/guiding-simulator.git
+cd guiding-simulator
 python3 -m venv .venv
 source .venv/bin/activate        # Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
@@ -40,7 +40,7 @@ comes from the config's `seed`.
 ## Use it from Python
 
 ```python
-from my_project.example import gaussian
+from guiding_simulator.example import gaussian
 
 gaussian([0.0, 1.0], amplitude=2.0, centre=0.0, sigma=1.0)
 # array([2.        , 1.21306132])

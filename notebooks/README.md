@@ -1,12 +1,12 @@
 # Notebooks
 
 Notebooks are for exploring, plotting and explaining. Logic you want to reuse
-belongs in `src/my_project/`, where it can be tested and imported from
+belongs in `src/guiding_simulator/`, where it can be tested and imported from
 anywhere.
 
 - **Name** notebooks with a number and a purpose: `01_quicklook.ipynb`,
   `02_fit_comparison.ipynb`.
-- **Kernel:** run `make kernel` once, then choose "Python (my-project)" so the
+- **Kernel:** run `make kernel` once, then choose "Python (guiding-simulator)" so the
   notebook uses this project's `.venv`.
 - **Autoreload:** start with the cell from `01_quicklook.ipynb`, so edits to
   the package are picked up without restarting the kernel.

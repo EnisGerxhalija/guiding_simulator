@@ -1,5 +1,5 @@
 # Parameters for one analysis run, validated by RunConfig in
-# src/my_project/config.py: unknown keys, wrong types and out-of-range values
+# src/guiding_simulator/config.py: unknown keys, wrong types and out-of-range values
 # are rejected with a clear error.
 #
 # Make variants by copying this file (e.g. configs/low_noise.toml) and run:

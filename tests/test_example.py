@@ -7,7 +7,7 @@ numerical tolerances, and include awkward inputs (reversed axes, NaNs, ...).
 import numpy as np
 import pytest
 
-from my_project.example import FWHM_PER_SIGMA, gaussian, sampled_maximum, simulate_peak
+from guiding_simulator.example import FWHM_PER_SIGMA, gaussian, sampled_maximum, simulate_peak
 
 
 def test_gaussian_equals_amplitude_at_centre():

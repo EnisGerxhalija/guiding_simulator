@@ -6,14 +6,14 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "my-project"
+name = "guiding-simulator"
 version = "0.1.0"
-description = "A short description of the project."
+description = "Analysis and simulation code for tip/tilt guiding simulator"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{ name = "Your Name", email = "you@example.com" }]
+authors = [{ name = "Enis Gerxhalija", email = "eg757@cam.ac.uk" }]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
@@ -47,15 +47,15 @@ notebook = [
 ]
 
 [project.urls]
-Repository = "https://github.com/your-github-username/my-project"
-Documentation = "https://your-github-username.github.io/my-project/"
-Changelog = "https://github.com/your-github-username/my-project/blob/main/CHANGELOG.md"
+Repository = "https://github.com/EnisGerxhalija/guiding-simulator"
+Documentation = "https://EnisGerxhalija.github.io/guiding-simulator/"
+Changelog = "https://github.com/EnisGerxhalija/guiding-simulator/blob/main/CHANGELOG.md"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-my_project = ["py.typed"]
+guiding_simulator = ["py.typed"]
 
 # ---------------------------------------------------------------- pytest ---
 [tool.pytest.ini_options]
@@ -70,7 +70,7 @@ addopts = [
 xfail_strict = true
 
 [tool.coverage.run]
-source = ["my_project"]
+source = ["guiding_simulator"]
 branch = true
 
 [tool.coverage.report]

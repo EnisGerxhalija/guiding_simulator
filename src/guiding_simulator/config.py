@@ -4,7 +4,7 @@ Two kinds of configuration live here, deliberately kept apart:
 
 * :class:`Settings` says *where* things are on this machine (data and output
   folders) and holds any secrets. It is read from environment variables
-  prefixed ``MY_PROJECT_`` and from the project's ``.env`` file, which is
+  prefixed ``GUIDING_SIMULATOR_`` and from the project's ``.env`` file, which is
   never committed.
 * :class:`RunConfig` says *what* an analysis run does (parameters, random
   seed). It is read from a TOML file in ``configs/``, which IS committed, so
@@ -56,7 +56,7 @@ def find_project_root(start: Path | None = None) -> Path:
 class Settings(BaseSettings):
     """Machine-specific settings, read from the environment and ``.env``.
 
-    Each field ``foo`` is read from the variable ``MY_PROJECT_FOO``. A value
+    Each field ``foo`` is read from the variable ``GUIDING_SIMULATOR_FOO``. A value
     in the real environment beats one in ``.env``, which beats the default.
     Relative paths are resolved against `project_root`, so the result is
     the same whether you run from the project root, ``notebooks/`` or
@@ -64,7 +64,7 @@ class Settings(BaseSettings):
     """
 
     model_config = SettingsConfigDict(
-        env_prefix="MY_PROJECT_",
+        env_prefix="GUIDING_SIMULATOR_",
         env_file_encoding="utf-8",
         extra="ignore",
     )

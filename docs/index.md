@@ -1,6 +1,6 @@
-# My Project
+# Guiding Simulator
 
-A short description of the project.
+Analysis and simulation code for tip/tilt guiding simulator
 
 <!-- Say what question this code answers, what data it works on and what it
 produces. Keep README.md and this page roughly in sync. -->

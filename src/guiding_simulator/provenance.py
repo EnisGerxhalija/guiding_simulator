@@ -17,7 +17,7 @@ from typing import Any
 
 from pydantic import BaseModel
 
-from my_project import __version__
+from guiding_simulator import __version__
 
 METADATA_FILENAME = "run_metadata.json"
 
@@ -118,7 +118,7 @@ def collect_metadata(
     }
     return {
         "created_utc": datetime.now(UTC).isoformat(timespec="seconds"),
-        "package": {"name": "my-project", "version": __version__},
+        "package": {"name": "guiding-simulator", "version": __version__},
         "command": sys.argv,
         "git": git_info(),
         "python": sys.version,

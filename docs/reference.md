@@ -1,12 +1,12 @@
 # API reference
 
-Generated from the docstrings in `src/my_project/`. Add a `:::` line for each
+Generated from the docstrings in `src/guiding_simulator/`. Add a `:::` line for each
 new module.
 
-::: my_project.config
+::: guiding_simulator.config
 
-::: my_project.example
+::: guiding_simulator.example
 
-::: my_project.provenance
+::: guiding_simulator.provenance
 
-::: my_project.logging_utils
+::: guiding_simulator.logging_utils

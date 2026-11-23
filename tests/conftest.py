@@ -14,7 +14,7 @@ def rng() -> np.random.Generator:
 
 @pytest.fixture(autouse=True)
 def _isolate_environment(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Stop the developer's own MY_PROJECT_* variables leaking into tests."""
+    """Stop the developer's own GUIDING_SIMULATOR_* variables leaking into tests."""
     for key in list(os.environ):
-        if key.startswith("MY_PROJECT_"):
+        if key.startswith("GUIDING_SIMULATOR_"):
             monkeypatch.delenv(key)

@@ -6,7 +6,7 @@ Usage::
     python scripts/run_analysis.py --config configs/my_run.toml
 
 Scripts like this one stay thin: they read the configuration, call functions
-from the ``my_project`` package, and save the results. All real logic lives in
+from the ``guiding_simulator`` package, and save the results. All real logic lives in
 the package, where it can be tested and reused from notebooks.
 
 Each run writes a new folder ``<output_dir>/<timestamp>_<name>/`` containing
@@ -22,10 +22,10 @@ from pathlib import Path
 
 import numpy as np
 
-from my_project.config import load_run_config, load_settings
-from my_project.example import sampled_maximum, simulate_peak
-from my_project.logging_utils import setup_logging
-from my_project.provenance import create_run_dir, write_metadata
+from guiding_simulator.config import load_run_config, load_settings
+from guiding_simulator.example import sampled_maximum, simulate_peak
+from guiding_simulator.logging_utils import setup_logging
+from guiding_simulator.provenance import create_run_dir, write_metadata
 
 logger = logging.getLogger("run_analysis")
 

@@ -20,22 +20,22 @@ cp .env.example .env
 
 | Variable | Default | Meaning |
 |---|---|---|
-| `MY_PROJECT_DATA_DIR` | `data` | Folder containing `raw/` and `processed/` |
-| `MY_PROJECT_OUTPUT_DIR` | `outputs` | Where run folders are written |
-| `MY_PROJECT_LOG_LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARNING` or `ERROR` |
-| `MY_PROJECT_API_KEY` | unset | Example secret; hidden when printed |
+| `GUIDING_SIMULATOR_DATA_DIR` | `data` | Folder containing `raw/` and `processed/` |
+| `GUIDING_SIMULATOR_OUTPUT_DIR` | `outputs` | Where run folders are written |
+| `GUIDING_SIMULATOR_LOG_LEVEL` | `INFO` | `DEBUG`, `INFO`, `WARNING` or `ERROR` |
+| `GUIDING_SIMULATOR_API_KEY` | unset | Example secret; hidden when printed |
 
 Relative paths are relative to the project root. A variable set in your shell
 overrides the value in `.env`.
 
 ```python
-from my_project.config import load_settings
+from guiding_simulator.config import load_settings
 
 settings = load_settings()
 settings.raw_dir  # absolute path, wherever you run from
 ```
 
-To add a setting, add a field to `Settings` in `src/my_project/config.py`
+To add a setting, add a field to `Settings` in `src/guiding_simulator/config.py`
 and a placeholder line to `.env.example`.
 
 ## Run configs (`configs/*.toml`)
@@ -54,7 +54,7 @@ Unknown keys are errors, so a typo such as `sead = 1` is caught rather than
 silently ignored.
 
 To add a parameter, add a field to the relevant model in
-`src/my_project/config.py`, with bounds and a description that states the
+`src/guiding_simulator/config.py`, with bounds and a description that states the
 units:
 
 ```python
