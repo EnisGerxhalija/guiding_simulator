@@ -1,0 +1,109 @@
+# Project metadata, dependencies and tool settings, all in one file.
+# Guide: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my-project"
+version = "0.1.0"
+description = "A short description of the project."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Your Name", email = "you@example.com" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+# Libraries the code needs to RUN. Use loose lower bounds here; record exact
+# versions for a study with `make freeze` (writes requirements-lock.txt).
+dependencies = [
+    "numpy>=1.26",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+]
+
+# Extras: install with  pip install -e ".[dev,docs,notebook]"
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "ruff>=0.15",
+    "pre-commit>=4",
+    "build>=1.2",
+    "twine>=6",
+]
+docs = [
+    "mkdocs>=1.6,<2", # MkDocs 2.0 drops plugins; stay on 1.x (see TEMPLATE.md)
+    "mkdocs-material>=9.5,<10",
+    "mkdocstrings[python]>=0.29",
+]
+notebook = [
+    "ipykernel>=6",
+    "matplotlib>=3.8",
+]
+
+[project.urls]
+Repository = "https://github.com/your-github-username/my-project"
+Documentation = "https://your-github-username.github.io/my-project/"
+Changelog = "https://github.com/your-github-username/my-project/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+my_project = ["py.typed"]
+
+# ---------------------------------------------------------------- pytest ---
+[tool.pytest.ini_options]
+testpaths = ["tests", "src"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--import-mode=importlib",
+    "--doctest-modules", # the Examples in docstrings are run as tests
+]
+xfail_strict = true
+
+[tool.coverage.run]
+source = ["my_project"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+
+# ------------------------------------------------------------------ ruff ---
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes: unused imports/variables, undefined names
+    "I",   # isort: import order
+    "B",   # bugbear: likely bugs (mutable defaults, ...)
+    "UP",  # pyupgrade: modern syntax for the supported Python versions
+    "SIM", # simplifications
+    "NPY", # NumPy-specific rules (legacy np.random, ...)
+    "PT",  # pytest style
+    "RUF", # ruff-specific rules
+    "D",   # docstrings
+]
+ignore = [
+    "E501", # line length: the formatter handles code; long strings are fine
+    "D105", # docstrings on magic methods
+    "D107", # docstrings on __init__ (document the class instead)
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+"notebooks/**" = ["D", "E402"]

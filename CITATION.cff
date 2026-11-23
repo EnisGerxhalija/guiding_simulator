@@ -1,0 +1,13 @@
+# Lets GitHub show a "Cite this repository" button.
+# Format: https://citation-file-format.github.io
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "My Project"
+abstract: "A short description of the project."
+type: software
+authors:
+  - family-names: "Name"
+    given-names: "Your"
+    email: "you@example.com"
+license: MIT
+repository-code: "https://github.com/your-github-username/my-project"

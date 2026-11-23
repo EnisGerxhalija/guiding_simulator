@@ -1,0 +1,20 @@
+# Parameters for one analysis run, validated by RunConfig in
+# src/my_project/config.py: unknown keys, wrong types and out-of-range values
+# are rejected with a clear error.
+#
+# Make variants by copying this file (e.g. configs/low_noise.toml) and run:
+#   python scripts/run_analysis.py --config configs/low_noise.toml
+# Commit config files: they are the record of what each result used.
+
+name = "default" # label used in the output folder name
+seed = 42        # makes the random parts of the run repeatable
+
+# EXAMPLE parameters for the example analysis. Replace with your own.
+[example]
+n_points = 201
+x_start = -5.0    # x_start, x_stop, centre and sigma share the same units
+x_stop = 5.0
+amplitude = 1.0
+centre = 0.3
+sigma = 0.8       # standard deviation, NOT the FWHM
+noise_std = 0.05
