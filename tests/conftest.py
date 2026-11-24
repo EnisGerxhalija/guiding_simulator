@@ -1,6 +1,8 @@
-"""Shared pytest fixtures, available to every test file automatically."""
+"""Shared pytest fixtures.
 
-import os
+A fixture is a helper that pytest hands to any test function that has a
+parameter with the same name, e.g. ``def test_something(rng):``.
+"""
 
 import numpy as np
 import pytest
@@ -10,11 +12,3 @@ import pytest
 def rng() -> np.random.Generator:
     """A seeded random generator, so tests are repeatable."""
     return np.random.default_rng(12345)
-
-
-@pytest.fixture(autouse=True)
-def _isolate_environment(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Stop the developer's own GUIDING_SIMULATOR_* variables leaking into tests."""
-    for key in list(os.environ):
-        if key.startswith("GUIDING_SIMULATOR_"):
-            monkeypatch.delenv(key)

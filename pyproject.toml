@@ -1,5 +1,6 @@
-# Project metadata, dependencies and tool settings, all in one file.
-# Guide: https://packaging.python.org/en/latest/guides/writing-pyproject-toml/
+# Project settings: the project's name, which Python it needs and which
+# libraries it uses. Install everything once, inside your .venv, with:
+#     python -m pip install -e ".[dev]"
 
 [build-system]
 requires = ["setuptools>=77"]
@@ -14,96 +15,24 @@ requires-python = ">=3.11"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{ name = "Enis Gerxhalija", email = "eg757@cam.ac.uk" }]
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-]
-# Libraries the code needs to RUN. Use loose lower bounds here; record exact
-# versions for a study with `make freeze` (writes requirements-lock.txt).
+
+# Libraries the code needs to run.
 dependencies = [
     "numpy>=1.26",
-    "pydantic>=2.7",
-    "pydantic-settings>=2.3",
-]
-
-# Extras: install with  pip install -e ".[dev,docs,notebook]"
-[project.optional-dependencies]
-dev = [
-    "pytest>=8",
-    "pytest-cov>=5",
-    "ruff>=0.15",
-    "pre-commit>=4",
-    "build>=1.2",
-    "twine>=6",
-]
-docs = [
-    "mkdocs>=1.6,<2", # MkDocs 2.0 drops plugins; stay on 1.x (see TEMPLATE.md)
-    "mkdocs-material>=9.5,<10",
-    "mkdocstrings[python]>=0.29",
-]
-notebook = [
-    "ipykernel>=6",
     "matplotlib>=3.8",
 ]
 
-[project.urls]
-Repository = "https://github.com/EnisGerxhalija/guiding-simulator"
-Documentation = "https://EnisGerxhalija.github.io/guiding-simulator/"
-Changelog = "https://github.com/EnisGerxhalija/guiding-simulator/blob/main/CHANGELOG.md"
+# Extra tools for working on the code: tests and Jupyter notebooks.
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ipykernel>=6",
+]
 
+# The code lives in src/.
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.setuptools.package-data]
-guiding_simulator = ["py.typed"]
-
-# ---------------------------------------------------------------- pytest ---
+# pytest looks for tests in tests/.
 [tool.pytest.ini_options]
-testpaths = ["tests", "src"]
-addopts = [
-    "-ra",
-    "--strict-markers",
-    "--strict-config",
-    "--import-mode=importlib",
-    "--doctest-modules", # the Examples in docstrings are run as tests
-]
-xfail_strict = true
-
-[tool.coverage.run]
-source = ["guiding_simulator"]
-branch = true
-
-[tool.coverage.report]
-show_missing = true
-skip_covered = true
-
-# ------------------------------------------------------------------ ruff ---
-[tool.ruff]
-line-length = 88
-
-[tool.ruff.lint]
-select = [
-    "E",   # pycodestyle errors
-    "W",   # pycodestyle warnings
-    "F",   # pyflakes: unused imports/variables, undefined names
-    "I",   # isort: import order
-    "B",   # bugbear: likely bugs (mutable defaults, ...)
-    "UP",  # pyupgrade: modern syntax for the supported Python versions
-    "SIM", # simplifications
-    "NPY", # NumPy-specific rules (legacy np.random, ...)
-    "PT",  # pytest style
-    "RUF", # ruff-specific rules
-    "D",   # docstrings
-]
-ignore = [
-    "E501", # line length: the formatter handles code; long strings are fine
-    "D105", # docstrings on magic methods
-    "D107", # docstrings on __init__ (document the class instead)
-]
-
-[tool.ruff.lint.pydocstyle]
-convention = "numpy"
-
-[tool.ruff.lint.per-file-ignores]
-"tests/**" = ["D"]
-"notebooks/**" = ["D", "E402"]
+testpaths = ["tests"]

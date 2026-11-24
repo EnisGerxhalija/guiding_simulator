@@ -1,105 +1,53 @@
 # Guiding Simulator
 
-[![CI](https://github.com/EnisGerxhalija/guiding-simulator/actions/workflows/ci.yml/badge.svg)](https://github.com/EnisGerxhalija/guiding-simulator/actions/workflows/ci.yml)
-
 Analysis and simulation code for tip/tilt guiding simulator
 
-<!-- Two or three sentences: what question does this code answer, what data
-does it work on, and what does it produce? -->
+## Set up (once)
 
-## Installation
-
-Requires Python 3.11 or newer.
-
-```bash
-git clone https://github.com/EnisGerxhalija/guiding-simulator.git
-cd guiding-simulator
-make setup
-```
-
-`make setup` creates a `.venv`, installs the package in editable mode with all
-extras, and enables the git hooks. Without `make` (e.g. on Windows):
+Needs Python 3.11 or newer (check with `python3 --version`).
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate        # Windows PowerShell: .venv\Scripts\Activate.ps1
+source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install -e ".[dev,docs,notebook]"
-pre-commit install
+python -m pip install -e ".[dev]"
 ```
 
-## Quick start
+`-e` means "editable": changes you make in `src/` work straight away,
+without installing again. Run `source .venv/bin/activate` each time you open
+a new terminal.
+
+## Run the tests
 
 ```bash
-cp .env.example .env             # optional: paths and secrets for this machine
-python scripts/run_analysis.py --config configs/default.toml
+python -m pytest
 ```
 
-This creates `outputs/<timestamp>_default/` with the results, a copy of the
-config, the log and `run_metadata.json` (git commit, package versions, ...).
-
-From Python:
-
-```python
-from guiding_simulator.example import gaussian
-
-gaussian([0.0, 1.0], amplitude=2.0, centre=0.0, sigma=1.0)
-```
-
-## Project layout
+## Folders
 
 ```text
-guiding-simulator/
-├── src/guiding_simulator/      # the package: all reusable code lives here
-│   ├── config.py        #   Settings (.env) and RunConfig (configs/*.toml)
-│   ├── provenance.py    #   run folders and run_metadata.json
-│   ├── logging_utils.py #   setup_logging() for scripts and notebooks
-│   └── example.py       #   example analysis; replace with your own
-├── scripts/             # thin entry points that call the package
-├── configs/             # run configs (committed)
-├── tests/               # pytest tests
-├── notebooks/           # exploration; import from the package
-├── data/raw/            # original data, read-only (not in git)
-├── data/processed/      # derived data, regenerable (not in git)
-├── outputs/             # one folder per run (not in git)
-├── docs/ + mkdocs.yml   # documentation site
-├── pyproject.toml       # metadata, dependencies, tool settings
-├── Makefile             # shortcuts: make help
-└── .env.example         # template for your private .env
+guiding_simulator/
+├── src/guiding_simulator/   # your code; import it with  import guiding_simulator
+├── tests/                   # tests, run with pytest
+├── notebooks/               # exploring and plotting; import your code from src/
+├── data/raw/                # original input files (not in git)
+├── data/processed/          # files your code makes (not in git)
+├── outputs/                 # results and figures (not in git)
+├── pyproject.toml           # project name, Python version, libraries
+├── LICENSE                  # MIT: others may reuse the code with credit
+└── README.md
 ```
 
-## Development
+## The removed template parts
 
-| Command | What it does |
-|---|---|
-| `make test` | run the tests |
-| `make lint` | run all pre-commit checks (ruff, formatting, notebook stripping, ...) |
-| `make format` | auto-format and fix lint issues |
-| `make check` | lint + tests + docs build: what CI runs |
-| `make docs` | preview the documentation at <http://127.0.0.1:8000> |
-| `make build` | build the wheel and sdist into `dist/` |
-| `make freeze` | pin exact versions to `requirements-lock.txt` |
-| `make kernel` | make `.venv` available as a Jupyter kernel |
-
-Workflow: branch from an up-to-date `main`, commit (the hooks check your
-changes), push, open a pull request. CI must pass before merging.
+This is a simplified version of the original project template. The parts
+taken out for now (settings and config files, run records, logging, docs,
+scripts, changelog, citation file) are saved in git commit `4eb7792`. To get
+one back, for example the docs folder:
 
 ```bash
-git switch main && git pull --ff-only
-git switch -c feature/short-description
+git restore --source=4eb7792 -- docs/
 ```
-
-## Reproducibility
-
-- Every run records its config, git commit (and whether the working tree had
-  uncommitted changes), Python and package versions in `run_metadata.json`.
-- Randomness comes only from the `seed` in the run config.
-- For results that go into a paper: commit, tag the commit
-  (`git tag v0.1.0`), and run `make freeze` to record exact dependency versions.
-
-## Citation
-
-If you use this code, please cite it using [`CITATION.cff`](CITATION.cff).
 
 ## License
 
