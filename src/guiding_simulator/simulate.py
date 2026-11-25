@@ -1,6 +1,9 @@
 from guiding_simulator import constants as c
 import numpy as np 
 
+rng = np.random.default_rng(seed=42)             # fixed seed so results are reproducible
+
+
 def fwhm_arcsec_to_sigma_px(fwhm_arcsec):
     """Convert a seeing FWHM in arcseconds to a Gaussian sigma in pixels."""
     fwhm_px = fwhm_arcsec / c.ARCSEC_PER_PX
@@ -21,7 +24,6 @@ def calculate_star_peak(fwhm_arcsec, total_counts = 100000):
     peak_brightness = total_counts / (2 * np.pi * sigma_px**2)
 
     return peak_brightness
-
 
 def make_gaussian_star(x0, y0, fwhm_arcsec):
     """Return a pure light image containing one round Gaussian star.
@@ -58,7 +60,38 @@ def cut_fibre_hole(light, centre_hole_x = c.CAMERA_XRES/2, centre_hole_y = c.CAM
 
 def camera_readout(light):
     """Turn light into what the camera records: capped at 4095, rounded to whole numbers."""
+    
     light = np.minimum(light, c.CAMERA_MAX_PIXEL_VALUE)
     counts = np.round(light).astype(np.uint16)
     return counts
 
+def simulate_star_with_fibre_hole(x0, y0, fwhm_arcsec):
+    """Simulate a star with a fibre hole and return the camera image.
+    
+    Parameters:
+    - x0, y0: The center of the star in pixel coordinates.
+    - fwhm_arcsec: The full width at half maximum of the star in arcseconds.
+    
+    Returns:
+    - A 2D numpy array representing the camera image with the Gaussian star and fibre hole.
+    """
+    light = make_gaussian_star(x0, y0, fwhm_arcsec)
+    light_with_hole = cut_fibre_hole(light)
+    image = camera_readout(light_with_hole)
+    return image
+
+def simulate_noisy_image(x0, y0, fwhm_arcsec, noise_frac):
+    """Simulate a camera frame with white read noise, then subtract the bias as a real reduction would.
+
+    - The star (with fibre hole) sits on a constant camera bias level (c.CAMERA_BIAS_ADU).
+    - White Gaussian noise with sigma = noise_frac * observed star peak is added to every pixel.
+    - camera_readout rounds and saturates; the bias keeps all pixels positive, so nothing is clipped at 0.
+    - The bias is then subtracted, leaving zero-mean noise for the fit.
+    """
+    light = cut_fibre_hole(make_gaussian_star(x0, y0, fwhm_arcsec))
+    sigma = noise_frac * light.max()            # peak of the star as seen by the camera (i.e. outside the hole)
+    raw = light + c.CAMERA_BIAS_ADU + rng.normal(0.0, sigma, light.shape)
+    if raw.min() < 0:
+        print(f"warning: {np.sum(raw < 0)} pixels below 0 (noise too large for bias) - they will be clipped")
+    frame = camera_readout(np.clip(raw, 0, None))
+    return frame.astype(float) - c.CAMERA_BIAS_ADU
