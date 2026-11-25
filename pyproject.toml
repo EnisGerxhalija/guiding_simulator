@@ -20,6 +20,7 @@ authors = [{ name = "Enis Gerxhalija", email = "eg757@cam.ac.uk" }]
 dependencies = [
     "numpy>=1.26",
     "matplotlib>=3.8",
+    "scipy>=1.11",
 ]
 
 # Extra tools for working on the code: tests and Jupyter notebooks.
