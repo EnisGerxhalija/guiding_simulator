@@ -1,33 +1,14 @@
-# --- Environments and secrets ----------------------------------------------
+# Python environment and caches
 .venv/
-venv/
-.env
-.env.*
-!.env.example
-
-# --- Python caches and build artefacts --------------------------------------
 __pycache__/
 *.py[cod]
 *.egg-info/
-build/
-dist/
 .pytest_cache/
-.ruff_cache/
-.mypy_cache/
-.coverage
-.coverage.*
-coverage.xml
-htmlcov/
 
-# --- Docs build ---------------------------------------------------------------
-site/
-
-# --- Jupyter ------------------------------------------------------------------
+# Jupyter
 .ipynb_checkpoints/
 
-# --- Research data and generated outputs --------------------------------------
-# Raw data is usually too large or sensitive for git; processed data and
-# outputs can be regenerated. Remove a rule to track small files deliberately.
+# Data and results stay out of git; the .gitkeep files keep the empty folders
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*
@@ -35,9 +16,8 @@ data/processed/*
 outputs/*
 !outputs/.gitkeep
 
-# --- OS and editor clutter ------------------------------------------------------
+# Private settings and computer/editor clutter
+.env
 .DS_Store
-Thumbs.db
-.idea/
 .vscode/
-*.swp
+.idea/

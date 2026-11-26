@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from guiding_simulator import constants as c
 from guiding_simulator.simulate import simulate_star_with_fibre_hole
 from guiding_simulator.fit_gaussian import fit_clipped_gaussian
-
+from guiding_simulator import save_figs as sf
 
 # --- simulation settings for star perfectly on centre of fibre -------------------------------------------------
 x0, y0 = c.CAMERA_XRES/2, c.CAMERA_YRES/2  # center of the camera sensor
@@ -39,10 +39,5 @@ ax.legend()
 fig.tight_layout()
 
 # --- save figure to outputs/figures -----------------------------------------------------------------------------
-fig_dir = Path(__file__).resolve().parents[1] / "outputs" / "figures"
-fig_dir.mkdir(parents=True, exist_ok=True)
-fig_path = fig_dir / "fit_vs_fwhm_no_noise.png"
-fig.savefig(fig_path, dpi=200)
-print(f"Saved figure to {fig_path}")
-
+sf.save_figure(fig, "fit_vs_fwhm_no_noise.png")
 plt.show()

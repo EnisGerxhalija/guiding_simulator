@@ -1,5 +1,8 @@
 from guiding_simulator.simulate import make_gaussian_star, cut_fibre_hole, camera_readout
 import matplotlib.pyplot as plt
+from pathlib import Path
+
+from guiding_simulator import constants as c
 
 # choose a star position and FWHM
 
@@ -26,3 +29,6 @@ ax.set_xlabel("x (px)")
 ax.set_ylabel("y (px)")
 fig.colorbar(im, ax=ax)
 plt.show()
+
+
+
