@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from guiding_simulator import constants as c
 from guiding_simulator.simulate import make_gaussian_star, cut_fibre_hole, camera_readout, simulate_noisy_image
 from guiding_simulator.fit_gaussian import fit_clipped_gaussian
-
+from guiding_simulator import save_figs as sf
 
 # --- simulation settings ----------------------------------------------------------------------------------------
 offsets_px = [0.0, 1.0]                          # star offset from fibre centre along x (pixels): centred, 1 px
@@ -58,10 +58,5 @@ fig.suptitle("Effect of white camera noise on the fit")
 fig.tight_layout()
 
 # --- save figure to outputs/figures -----------------------------------------------------------------------------
-fig_dir = Path(__file__).resolve().parents[1] / "outputs" / "figures"
-fig_dir.mkdir(parents=True, exist_ok=True)
-fig_path = fig_dir / "fit_vs_fwhm_with_noise.png"
-fig.savefig(fig_path, dpi=200)
-print(f"Saved figure to {fig_path}")
-
+sf.save_figure(fig, "fit_vs_fwhm_with_noise.png")
 plt.show()
